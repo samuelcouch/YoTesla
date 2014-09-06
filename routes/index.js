@@ -1,3 +1,3 @@
-exports.index = function(req, res){
+exports.rottentomatoes = function(req, res){
   res.render('index')
 }

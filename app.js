@@ -1,8 +1,9 @@
 var express = require('express')
-  , controllers  = require('./routes')
   , http    = require('http')
-  , path    = require('path'),
-  , config = require('config.js')
+  , path    = require('path')
+  , config = require('./config.js')
+  , Yo = require('yoapi')
+  , yo = new Yo({'api_token': config.YOAPIKEY })
 
 var app = express()
 
@@ -23,8 +24,17 @@ if ('development' === app.get('env')) {
   app.use(express.errorHandler())
 }
 
-app.get('/', controllers.index)
-app.get('/yo', controllers.yo.postYo)
+var postYo = function(req, res){
+  yo.yoAll(function(err, data){
+  if(err){
+    console.error(err);
+  }else{
+    console.info(data);
+  }
+  })
+}
+
+app.post('/yo', postYo)
 
 
 http.createServer(app).listen(app.get('port'), function(){

@@ -34,7 +34,7 @@ var postYo = function(req, res){
   })
 }
 
-app.post('/yo', postYo)
+app.post('/yoall', postYo)
 
 
 http.createServer(app).listen(app.get('port'), function(){

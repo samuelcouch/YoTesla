@@ -1,0 +1,7 @@
+{
+	"portal_url": "http://localhost:8080/mockTesla",
+	"stream_url": "http://localhost:8080/mockTesla/vehicles",
+	"username": "yourMyTeslaLogin@email.com",
+	"password": "yourPassword",
+	"output_file": "stream_output.txt" 
+}

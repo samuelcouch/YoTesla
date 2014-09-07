@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Yo! Where's my car!?</title>
+
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Include the compiled Ratchet CSS -->
+    <link href="css/ratchet.css" rel="stylesheet">
+
+    <!-- Include the compiled Ratchet JS -->
+    <link rel="stylesheet" type="text/css" href="css/tomtom.map.min.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" href="css/tomtom.map.ie.min.css" /><![endif]-->
+    <script type="text/javascript" src="js/leaflet.js"></script>
+    <script type="text/javascript" src="js/tomtom.map.js"></script>
+    <script src="js/ratchet.js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script type="text/javascript" src="js/apikey.js"></script>
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            var map = new tomtom.Map({
+            domNode: "map",
+            cookie: false,
+            scale: true,
+            center: [39.73845, -104.98485],
+            zoom: 12
+          });
+            tomtom.setImagePath("../images/");
+        });
+    </script>
+    <style type="text/css">
+        #map {
+          width: 640px;
+          height: 480px;
+        }
+    </style>
+  </head>
+  <body>
+
+    <!-- Make sure all your bars are the first things in your <body> -->
+
+    <!-- Header without back icon -->
+    <!-- <header class="bar bar-nav">
+        <button class="btn pull-left">
+            Back
+        </button>
+        <h1 class="title">Ratchet</h1>
+    </header> -->
+
+    <!-- Header with back icon -->
+
+    <header class="bar bar-nav">
+        <h1 class="title">We found your car!</h1>
+    </header>
+
+    <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+
+    <!-- Content without padding -->
+    <!-- <div class="content">
+      <p>Hello World. This is my first Ratchet Prototype.</p>
+    </div> -->
+    
+    <div class="content">
+      <div id="map"></div>
+    </div>
+  </body>
+</html>

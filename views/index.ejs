@@ -1,59 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <title>CyberScout</title>
-        <meta name="description" content="Blueprint: Responsive Full Width Tabs" />
-        <meta name="keywords" content="responsive tabs, full width tabs, template, blueprint" />
-        <meta name="author" content="Codrops" />
-        <link rel="shortcut icon" href="../favicon.ico">
-        <link rel="stylesheet" type="text/css" href="css/demo.css" />
-        <link rel="stylesheet" type="text/css" href="css/component.css" />
-        <link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-        <!--[if IE]>
-        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
-    </head>
-    <body>
-        <div class="container">
-            <header class="clearfix">
-                <span class="heading">CyberScout</span>
-            </header>
-            <div id="tabs" class="tabs">
-                <nav>
-                    <ul>
-                        <li><a href="#autonomous"><span><i class="fa fa-paper-plane-o"></i> Autonomous</span></a></li>
-                        <li><a href="#teleop"><span><i class="fa fa-bolt"></i> Teleop</span></a></li>
-                        <li><a href="#review"><span><i class="fa fa-database"></i> Review</span></a></li>
-                    </ul>
-                </nav>
-                <div class="content">
-                    <section id="autonomous">
-                        <div class="row">
-                            <div class="col-md-6">
-                                
-                            </div>
-                            <div class="col-md-6">
-                            </div>
-                        </div>
-                    </section>
-                    <section id="teleop">
-                        
-                    </section>
-                    <section id="review">
-                        
-                    </section>
-                </div><!-- /content -->
-            </div><!-- /tabs -->
-        </div>
-        <script src="js/cbpFWTabs.js"></script>
-        <script>
-            new CBPFWTabs( document.getElementById( 'tabs' ) );
-        </script>
-        <script src="js/bootstrap.js"></script>
-        <script src="js/jquery.min.js"></script>
-    </body>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Yo! Where's my car!?</title>
+
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Include the compiled Ratchet CSS -->
+    <link href="css/ratchet.css" rel="stylesheet">
+
+    <!-- Include the compiled Ratchet JS -->
+    <script src="js/ratchet.js"></script>
+    <script src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script type="text/javascript">
+        var myFirebaseRef = new Firebase("https://wheresmycar.firebaseio.com/");
+
+        var submitForm = function(){
+            var fullName = $('#fullName').val();
+            var email = $('#email').val();
+            var yoUsername = $('#yoUsername').val();
+            var teslaUsername = $('#teslaUsername').val();
+
+            var objects = {'fullName': fullName, 'email': email, 'yoUsername': yoUsername, 'teslaUsername': teslaUsername};
+            myFirebaseRef.push(objects);
+            $("input").val('');
+            $("#before").slideUp();
+            $("#after").slideDown();
+        }
+    </script>
+    <style type="text/css">
+        .form-control::-moz-placeholder {
+              text-align: left;  
+              color: #777;
+              opacity: 1;
+              vertical-align: baseline;
+        }
+        .form-control:-ms-input-placeholder {
+            text-align: left;
+            color: #777;
+            vertical-align: baseline;
+        }
+        .form-control::-webkit-input-placeholder {
+          color: #777;
+          text-align: left;
+          vertical-align: baseline;
+        }
+    </style>
+  </head>
+  <body>
+
+    <!-- Make sure all your bars are the first things in your <body> -->
+
+    <!-- Header without back icon -->
+    <!-- <header class="bar bar-nav">
+        <button class="btn pull-left">
+            Back
+        </button>
+        <h1 class="title">Ratchet</h1>
+    </header> -->
+
+    <!-- Header with back icon -->
+
+    <header class="bar bar-nav">
+        <h1 class="title">Yo! Where's my car!?</h1>
+    </header>
+
+    <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+
+    <!-- Content without padding -->
+    <!-- <div class="content">
+      <p>Hello World. This is my first Ratchet Prototype.</p>
+    </div> -->
+
+    
+    <div class="content" id="before">
+        <!-- Content with padding -->
+        <form class="input-group">
+          <div class="input-row">
+            <label>Name:</label>
+            <input id="fullName" type="text" placeholder="Yo Mamma">
+          </div>
+          <div class="input-row">
+            <label>Email:</label>
+            <input id="email" type="email" placeholder="whereismy@car.io">
+          </div>
+          <div class="input-row">
+            <label>Yo Username:</label>
+            <input id="yoUsername" type="text" placeholder="CarHacksRocks">
+          </div>
+          <div class="input-row">
+            <label>Tesla Username:</label>
+            <input id="teslaUsername" type="text" placeholder="carhacks@MHacks.org">
+          </div>
+        </form>
+        <br />
+        <button onclick="submitForm();" class="btn btn-positive btn-block">Join!</button>
+    </div>
+    <div class="content" id="after" style="display:none">
+        <br />
+        <br />
+        <br />
+        <center style="color: #343434"><h3>Thanks for signing up, yo!</h1></center>
+    </div>
+    
+
+
+
+  </body>
 </html>

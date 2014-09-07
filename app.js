@@ -45,43 +45,49 @@ var yoAll = function(req, res){
   request(options, callback)
 }
 
-var sendYo = function(req, res){
+var sendYo = function(username, link){
   
 var options = {
   url: 'http://api.justyo.co/yo/',
   method: 'POST',
   form: {
     'api_token': '78d1e8f7-e846-ad7a-d1fd-ec3b19e72365',
-    'username': req.body.username,
-    'link': req.body.link }
+    'username': username,
+    'link': link }
   }
   var callback = function(err, resp, body){
-    res.end(body)
+    // res.end(body)
   }
-  console.log(options);
   request(options, callback);
 }
 
 var getYoer = function(req, res){
-  
-}
-
-var yolocation = function(req, res){
-  teslams.get_vid( { email: creds.username, password: creds.password }, function ( err, id ) {
-  if (err)
-    console.log(err);
-  else
-    console.log(id);
-    teslams.get_drive_state( id , function(state){
-      console.log(state)
-    });
-    res.send(200)
+  res.send(200);
+  var username = req.query.username;
+  yolocation(username, function(state) {
+    var link = 'http://489d3686.ngrok.com/gmaps?lat=' + state.latitude + '&lon=' + state.longitude;
+    sendYo(username, link);
   });
 }
 
+var yolocation = function(username, callback) {
+  teslams.get_vid( { email: creds.username, password: creds.password }, function ( id ) {
+    teslams.get_drive_state( id , callback);
+  });
+}
+
+app.get('/', function(req, res){
+  res.render('index')
+})
 app.post('/yoall', yoAll)
 app.post('/yolocation', yolocation)
-app.post('/yo', sendYo)
+app.get('/getYoer', getYoer)
+app.get('/tomtom', function(req, res){
+  res.render('tomtom')
+})
+app.get('/gmaps', function(req, res){
+  res.render('gmaps', {'lat': req.query.lat, 'lon': req.query.lon})
+})
 
 
 http.createServer(app).listen(app.get('port'), function(){

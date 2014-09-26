@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Yo! Where's my car!?</title>
+    <title>Yo! We found your car!</title>
 
     <!-- Sets initial viewport load and disables zooming  -->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
@@ -29,16 +29,18 @@
             domNode: "map",
             cookie: false,
             scale: true,
-            center: [39.73845, -104.98485],
-            zoom: 12
+            center: [<%= lat %>, <%= lon %>],
+            zoom: 15
           });
             tomtom.setImagePath("../images/");
+            var marker = new tomtom.Marker([<%= lat %>, <%= lon %>]);
+            map.addLayer(marker);
         });
     </script>
     <style type="text/css">
         #map {
-          width: 640px;
-          height: 480px;
+          width: 100%;
+          height: 100%;
         }
     </style>
   </head>
@@ -55,10 +57,6 @@
     </header> -->
 
     <!-- Header with back icon -->
-
-    <header class="bar bar-nav">
-        <h1 class="title">We found your car!</h1>
-    </header>
 
     <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
 

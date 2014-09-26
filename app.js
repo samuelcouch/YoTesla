@@ -35,7 +35,7 @@ var yoAll = function(req, res){
     url: 'http://api.justyo.co/yoall/',
     method: 'POST',
     form: {
-      'api_token': '78d1e8f7-e846-ad7a-d1fd-ec3b19e72365'
+      'api_token': '272ed222-17ce-61a5-c928-6b61ced71e67'
     }
   }
 
@@ -51,7 +51,7 @@ var options = {
   url: 'http://api.justyo.co/yo/',
   method: 'POST',
   form: {
-    'api_token': '78d1e8f7-e846-ad7a-d1fd-ec3b19e72365',
+    'api_token': '272ed222-17ce-61a5-c928-6b61ced71e67',
     'username': username,
     'link': link }
   }
